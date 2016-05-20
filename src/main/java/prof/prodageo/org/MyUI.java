@@ -38,7 +38,7 @@ public class MyUI extends UI {
         final VerticalLayout layout = new VerticalLayout();
         final TextField name = new TextField();
         final TextField surname = new TextField();
-        Button button = new Button("Click Me") ;
+        Button button = new Button("Valider") ;
         
 
     /* explicit callback */
@@ -61,7 +61,7 @@ public class MyUI extends UI {
         // final VerticalLayout layout = new VerticalLayout();
         
         // final TextField name = new TextField();
-        name.setCaption("Type your name here:");
+        name.setCaption("Recherche du film");
 
         /*
         Button button = new Button("Click Me");
