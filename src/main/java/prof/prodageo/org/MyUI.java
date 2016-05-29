@@ -9,9 +9,14 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
+import com.vaadin.server.ExternalResource;
+
 
 
 import java.util.ArrayList;
@@ -41,14 +46,21 @@ public class MyUI extends UI {
 
     /* explicit declaration as attributes of graphical components for GenMyModel */
         final VerticalLayout layout = new VerticalLayout();
+        final VerticalLayout layoutver2 = new VerticalLayout();
+        final HorizontalLayout layoutHor = new HorizontalLayout();
+        final HorizontalLayout layoutHor2 = new HorizontalLayout();
+        final VerticalLayout layoutver = new VerticalLayout();
+        Panel movieme = new Panel("MovieMe");
         final TextField film = new TextField();
         final TextField surname = new TextField();
+        Label titre = new Label ("MovieMe");
         Button rechercher = new Button("Rechercher") ;
         Button profil = new Button("Mon Profil");
         Button preferences = new Button("Preferences");
         Button after = new Button("After Movie");
         Button recherchesBut = new Button("Mes recherches");
         Button reservationsBut = new Button("Mes reservations");
+
 
 
     /* explicit callback */
@@ -76,6 +88,13 @@ public class MyUI extends UI {
                 log.info(s);
               }
             }
+
+            if(event.getSource().equals(reservationsBut)){
+              log.info("reservations bouton : ");
+              layout.addComponent(new Label("Voici vos reservations : film : Django:Unchained; Seances : VO_29.05.2012_12h50_stSever ; nb places : 3"));
+            }
+
+
         }
     }
 
@@ -83,6 +102,9 @@ public class MyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+
+        movieme.setHeight(100.0f, Unit.PERCENTAGE);
+        Image image = new Image(null,new ExternalResource("https://geoinfoindia.files.wordpress.com/2015/04/google-map.jpg"));
 
 
         // final VerticalLayout layout = new VerticalLayout();
@@ -102,9 +124,21 @@ public class MyUI extends UI {
         rechercher.addClickListener( callback ) ;
         after.addClickListener( callback ) ;
         recherchesBut.addClickListener( callback ) ;
+        reservationsBut.addClickListener( callback ) ;
 
-
-        layout.addComponents(profil,preferences, film, rechercher,after,recherchesBut,reservationsBut);
+        layoutver.addComponents(profil,preferences);
+        layoutver.setMargin(true);
+        layoutver.setSpacing(true);
+        layoutHor.addComponents(titre,layoutver);
+        layoutHor.setMargin(true);
+        layoutHor.setSpacing(true);
+        layoutver2.addComponents(recherchesBut,reservationsBut);
+        layoutver2.setMargin(true);
+        layoutver2.setSpacing(true);
+        layoutHor2.addComponents(after,layoutver2);
+        layoutHor2.setMargin(true);
+        layoutHor2.setSpacing(true);
+        layout.addComponents(layoutHor,film, rechercher,image,layoutHor2);
         layout.setMargin(true);
         layout.setSpacing(true);
 
